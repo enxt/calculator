@@ -8,6 +8,7 @@ import com.sanitas.calculator.service.CalculatorService;
 import com.sanitas.calculator.service.operation.AdditionOperationImpl;
 import com.sanitas.calculator.service.operation.Operation;
 import com.sanitas.calculator.service.operation.OperationContext;
+import com.sanitas.calculator.service.operation.SubtractOperationImpl;
 import io.corp.calculator.TracerImpl;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,16 +21,19 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith({SpringExtension.class, MockitoExtension.class})
-@ContextConfiguration(classes = {CalculatorServiceImpl.class, TracerImpl.class,
+@ContextConfiguration(classes = {
+    CalculatorServiceImpl.class,
+    TracerImpl.class,
     OperationContext.class,
-    AdditionOperationImpl.class})
+    AdditionOperationImpl.class,
+    SubtractOperationImpl.class})
 class CalculatorServiceImplTest {
 
   @Autowired
   CalculatorService calculatorService;
 
   @Test
-  void calculate() {
+  void calculate_addition_ok() {
     var operationRequest = new OperationRequest();
     operationRequest.setOperation(OperationEnum.ADD);
     operationRequest.setNumber1(BigDecimal.valueOf(11123.3));
@@ -38,6 +42,18 @@ class CalculatorServiceImplTest {
     final var result = calculatorService.calculate(operationRequest);
 
     assertEquals(operationRequest.getNumber1().add(operationRequest.getNumber2()), result);
+  }
+
+  @Test
+  void calculate_subtract_ok() {
+    var operationRequest = new OperationRequest();
+    operationRequest.setOperation(OperationEnum.SUB);
+    operationRequest.setNumber1(BigDecimal.valueOf(11123.3));
+    operationRequest.setNumber2(BigDecimal.valueOf(2342.2));
+
+    final var result = calculatorService.calculate(operationRequest);
+
+    assertEquals(operationRequest.getNumber1().subtract(operationRequest.getNumber2()), result);
   }
 
   @Test
