@@ -19,6 +19,7 @@
     <openapi-generator.version>6.2.0</openapi-generator.version>
     <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
     <modelmapper.version>3.1.0</modelmapper.version>
+    <tracer.version>1.0.0</tracer.version>
   </properties>
   <dependencies>
     <dependency>
@@ -54,6 +55,11 @@
       <groupId>org.modelmapper</groupId>
       <artifactId>modelmapper</artifactId>
       <version>${modelmapper.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.corp.calculator</groupId>
+      <artifactId>tracer</artifactId>
+      <version>${tracer.version}</version>
     </dependency>
   </dependencies>
 
