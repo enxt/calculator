@@ -18,6 +18,7 @@
     <java.version>17</java.version>
     <openapi-generator.version>6.2.0</openapi-generator.version>
     <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
+    <modelmapper.version>3.1.0</modelmapper.version>
   </properties>
   <dependencies>
     <dependency>
@@ -45,6 +46,11 @@
       <groupId>org.openapitools</groupId>
       <artifactId>jackson-databind-nullable</artifactId>
       <version>${jackson-databind-nullable.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.modelmapper</groupId>
+      <artifactId>modelmapper</artifactId>
+      <version>${modelmapper.version}</version>
     </dependency>
   </dependencies>
 
