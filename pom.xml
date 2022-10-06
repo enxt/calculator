@@ -11,7 +11,7 @@
   </parent>
   <groupId>com.sanitas</groupId>
   <artifactId>calculator</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>calculator</name>
   <description>calculator</description>
   <properties>
@@ -25,6 +25,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -45,11 +51,13 @@
       <groupId>org.openapitools</groupId>
       <artifactId>openapi-generator</artifactId>
       <version>${openapi-generator.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.openapitools</groupId>
       <artifactId>jackson-databind-nullable</artifactId>
       <version>${jackson-databind-nullable.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.modelmapper</groupId>
