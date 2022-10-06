@@ -9,6 +9,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -30,7 +31,8 @@ public class CalculatorExceptionHandler {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   @ExceptionHandler(value = {
       ConstraintViolationException.class,
-      HttpMessageNotReadableException.class})
+      HttpMessageNotReadableException.class,
+      MethodArgumentNotValidException.class})
   public ErrorResponseDto handleConstraintViolationException(
       ConstraintViolationException constraintViolationException) {
     return errorMessage(constraintViolationException);

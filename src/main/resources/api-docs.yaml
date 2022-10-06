@@ -21,7 +21,7 @@ paths:
               "$ref": "#/components/schemas/OperationRequest"
         required: true
       responses:
-        '200':
+        '201':
           description: Calculation completed
           content:
             application/json:
@@ -44,6 +44,7 @@ components:
       properties:
         operation:
           type: string
+          nullable: false
           description: Possible operations to select
           example: ADD
           enum:
@@ -51,10 +52,12 @@ components:
             - SUB
         number1:
           type: number
+          nullable: false
           description: First operand for the calc
           example: -2322.2
         number2:
           type: number
+          nullable: false
           description: Second operand for the calc
           example: 8373.45
       description: Necessary data for the calc
