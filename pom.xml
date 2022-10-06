@@ -16,6 +16,8 @@
   <description>calculator</description>
   <properties>
     <java.version>17</java.version>
+    <openapi-generator.version>6.2.0</openapi-generator.version>
+    <jackson-databind-nullable.version>0.2.3</jackson-databind-nullable.version>
   </properties>
   <dependencies>
     <dependency>
@@ -33,6 +35,17 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>openapi-generator</artifactId>
+      <version>${openapi-generator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openapitools</groupId>
+      <artifactId>jackson-databind-nullable</artifactId>
+      <version>${jackson-databind-nullable.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -48,6 +61,30 @@
             </exclude>
           </excludes>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>${openapi-generator.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/api-docs.yaml</inputSpec>
+              <generatorName>spring</generatorName>
+              <generateSupportingFiles>false</generateSupportingFiles>
+              <modelNameSuffix>Dto</modelNameSuffix>
+              <apiPackage>com.sanitas.api</apiPackage>
+              <modelPackage>com.sanitas.dto.api</modelPackage>
+              <configOptions>
+                <useTags>true</useTags>
+                <interfaceOnly>true</interfaceOnly>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

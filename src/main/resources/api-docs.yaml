@@ -1,0 +1,93 @@
+openapi: 3.0.2
+info:
+  title: Calculator API
+  version: 0.0.1-SNAPSHOT
+  description: Calculator API
+tags:
+  - name: Calculator
+    description: Simple calculator POC
+paths:
+  "/calculate":
+    post:
+      tags:
+        - Calculator
+      summary: Two elements calculation
+      description: Execute the calculation selected between the two elements provided
+      operationId: calculate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/OperationRequest"
+        required: true
+      responses:
+        '200':
+          description: Calculation completed
+          content:
+            application/json:
+              schema:
+                type: number
+        '400':
+          "$ref": "#/component/responses/BadRequest"
+        '422':
+          "$ref": "#/component/responses/UnprocessableEntity"
+        '500':
+          "$ref": "#/component/responses/InternalServerError"
+components:
+  schemas:
+    OperationRequest:
+      required:
+        - number1
+        - number2
+        - operation
+      type: object
+      properties:
+        operation:
+          type: string
+          description: Possible operations to select
+          example: ADD
+          enum:
+            - ADD
+            - SUB
+        number1:
+          type: number
+          description: First operand for the calc
+          example: -2322.2
+        number2:
+          type: number
+          description: Second operand for the calc
+          example: 8373.45
+      description: Necessary data for the calc
+    ErrorResponse:
+      required:
+        - timestamp
+        - message
+      type: object
+      properties:
+        timestamp:
+          type: string
+          pattern: "yyyy-MM-dd HH:mm:ss"
+          description: Service wrong response
+          example: "2000-10-31T01:30:00.000-05:00"
+        message:
+          type: string
+          description: This is the error message
+  responses:
+    BadRequest:
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+      description: "Bad request response 400"
+    UnprocessableEntity:
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+      description: "Unprocessable entity response 422"
+    InternalServerError:
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/ErrorResponse"
+      description: "Internal server error 500 response"
